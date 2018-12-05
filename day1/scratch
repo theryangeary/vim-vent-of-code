@@ -1,0 +1,16 @@
+" set inputlist and :source %
+function! MyFunc(mylist, a)
+  if index(a:mylist, a:mylist[-1]+a:a) >= 0
+    echom a:mylist[-1]+a:a
+  else
+    call add(a:mylist, a:mylist[-1]+a:a)
+  endif
+endfunction
+
+let mylist = [0]
+let a = 0
+let c = 1
+while c == 1
+  call MyFunc(mylist, get(inputlist, a))
+  let a = (a + 1) % len(inputlist)
+endwhile
